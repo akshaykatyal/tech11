@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+
+    <title>Python Google Home</title>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <h1 class="mt-4">Hello John,  {% print(user_name) %}! </h1>
+          <p>You're logged in!</p>
+          <p>Email: {% print(user_email) %}</p>
+          <div>
+            <p>Profile picture in Google:</p>
+            <img alt="Google profile pic" style="width: 200px; height: 200px;"
+                             src="{% print(user_profile_pic) %}"></img>
+          </div>
+          <a class="btn btn-primary mt-4" href="/logout">Logout Google</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+pipeline {
+		agent any
+    environment {
+        registry = "akshay/task2.1.2"
+        registryCredential = 'docker_akshay'
+        dockerImage = ''
+    }
+
+
+    stages {
+        stage('Cloning Git') {
+            steps {
+                 git branch: 'task2.1.2', url: 'https://gitlab.gwdg.de/akshay.katyal/tech11.git'
+        }
+      }
+        stage('Building  image') {
+            steps {
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                }
+            }
+        }
+        stage('Deploy image') {
+            steps {
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+					  dockerImage.push("$BUILD_NUMBER")
+                      dockerImage.push('latest')
+                    }
+                }
+            }
+        }
+		 stage('Docker Run') {
+           steps{
+             script {
+             dockerImage.run("-p 8000:8000 --rm --name api_hello")
+            }
+        }
+      }
+         stage('Cleaning up'){
+            steps {
+                sh "docker rmi $registry:$BUILD_NUMBER"
+            }
+        }
+    }
+}
