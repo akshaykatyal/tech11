@@ -16,8 +16,9 @@ class Google_User(UserMixin):
     def user_get(user_id):
         # retrieving data from database
         db = user_get()
+        # retrieving record from the user database
         user = db.execute(
-            "SELECT * FROM user WHERE id = ?", (user_id,)
+            "SELECT * FROM user WHERE id = ?",(user_id,)
         ).fetchone()
         if not user:
             return None
