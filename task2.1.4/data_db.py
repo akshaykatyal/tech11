@@ -38,4 +38,4 @@ def init_user_command():
 def init_app(app):
     app.teardown_appcontext(user_close)
     # function call for initialization
-    app.cli.add_command(init_db_command)
+    app.cli.add_command(init_user_command)

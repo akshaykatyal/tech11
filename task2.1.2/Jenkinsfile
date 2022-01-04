@@ -33,7 +33,7 @@ pipeline {
 		 stage('Docker Run') {
            steps{
              script {
-             dockerImage.run("-p 8000:8000 --rm --name api_hello")
+             dockerImage.run("-p 8000:8000 --name api_hello")
             }
         }
       }
